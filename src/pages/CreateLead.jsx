@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { tickets } from "../demoData";
 import axios from "axios";
 import { baseURL, token } from "../Api/Axios";
 import { useDispatch, useSelector } from "react-redux";
