@@ -16,13 +16,13 @@ import React, { useEffect, useState } from "react";
 import { baseURL, token } from "../Api/Axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Delete, Edit } from "@mui/icons-material";
-import { setLeadDependecy } from "../Redux/authSlice";
+import { setLeadDependency } from "../Redux/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const Leads = () => {
   const user = useSelector(state => state.auth.user)
   const navigate = useNavigate();
-  const LeadDependecy = useSelector((state) => state.auth.leadDependecy);
+  const LeadDependency = useSelector((state) => state.auth.leadDependency);
   const dispatch = useDispatch();
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [leads, setLeads] = useState([]);
@@ -31,13 +31,13 @@ const Leads = () => {
     axios
       .get(`${baseURL}/leads/all`, { headers: { token: token } })
       .then((res) => setLeads(res.data.data));
-  }, [LeadDependecy]);
+  }, [LeadDependency]);
 
   const handleConfirm = (id) => {
     axios
       .delete(`${baseURL}/leads/${id}`, { headers: { token: token } })
       .then((res) => {
-        dispatch(setLeadDependecy());
+        dispatch(setLeadDependency());
         setOpenConfirmation(false);
       });
   };

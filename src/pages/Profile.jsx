@@ -1,34 +1,29 @@
 import {
-  Box,
   Button,
   FormControl,
   FormLabel,
-  MenuItem,
   OutlinedInput,
-  Rating,
-  Select,
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { baseURL, token } from "../Api/Axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-
-const Profile = ({ editMode }) => {
+const Profile = () => {
   const user = useSelector((state) => state.auth.user);
-  const defaultFormData = { ...user, [name]: `${user.first_name} ${user.last_name}`};
+
+  const defaultFormData = {
+    ...user,
+    ["name"]: `${user.first_name} ${user.last_name}`,
+  };
   const [formData, setFormData] = useState(defaultFormData);
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${baseURL}/leads/create`, formData, {
-        headers: { token: token },
-      })
-      .then((res) => {
-      
-      });
+    axios.post(`${baseURL}/leads/create`, formData, {
+      headers: { token: token },
+    });
   };
   const handleChange = (e) => {
     setFormData((formData) => ({
@@ -111,25 +106,12 @@ const Profile = ({ editMode }) => {
           </Stack>
           <Stack component={"section"} gap={2} width={{ xs: 320, lg: 520 }}>
             <FormControl>
-              <FormLabel>Creator</FormLabel>
+              <FormLabel>Role</FormLabel>
               <OutlinedInput
-                placeholder="Enter Owner Name"
                 variant="outlined"
                 color="secondary"
-                name="owner"
-                value={formData?.creator}
-                onChange={handleChange}
-                disabled
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Lead Owner</FormLabel>
-              <OutlinedInput
-                placeholder="Enter Lead Owner"
-                variant="outlined"
-                color="secondary"
-                name="lead_owner"
-                value={formData?.lead_owner}
+                name="role"
+                value={formData?.role}
                 onChange={handleChange}
                 disabled
               />

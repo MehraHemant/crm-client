@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { baseURL, token } from "../Api/Axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setLeadDependecy } from "../Redux/authSlice";
+import { setLeadDependency } from "../Redux/authSlice";
 import { useParams } from "react-router-dom";
 
 const CreateLead = ({ editMode }) => {
@@ -52,14 +52,14 @@ const CreateLead = ({ editMode }) => {
             headers: { token: token },
           })
           .then((res) => {
-            dispatch(setLeadDependecy());
+            dispatch(setLeadDependency());
           })
       : axios
           .post(`${baseURL}/leads/create`, formData, {
             headers: { token: token },
           })
           .then((res) => {
-            dispatch(setLeadDependecy());
+            dispatch(setLeadDependency());
             setFormData(defaultFormData);
           });
   };
